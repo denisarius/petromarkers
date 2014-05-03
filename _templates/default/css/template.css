@@ -1,0 +1,395 @@
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+*{
+	margin:0;
+	padding: 0;
+}
+
+ @font-face {
+    font-family: "Alkonaut_v1_0"; 
+    src: url(../fonts/Alkonaut_v1_0.ttf);
+}
+
+br {
+ clear: both;
+ margin: 0px;
+ height: 0px;
+ line-height: 0px;
+ font-size: 0px;
+}
+
+body{
+	font: 14px Arial;
+}
+
+ul{
+	list-style: none;
+}
+
+p{
+	font-size: 16px;
+	font-family: "Georgia";
+	margin-bottom: 20px;
+	line-height: 1.5;
+}
+
+input[type="button"] {
+	border: none;
+	padding: 5px 10px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background: #bcc6ce;
+	font-size: 16px;
+	font-family: "Georgia";
+	text-align: center;
+	cursor: pointer;
+}
+
+input[type="button"]:hover{
+	opacity: .8;
+}
+
+/*HEADER*/
+
+.top_menu_container{
+	height: 50px;
+	width: 100%;
+	background: #bcc6ce;
+	position: fixed;
+	top:0;
+	left: 0;
+	z-index: 9;
+}
+
+.center_container{
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.top_menu_line{
+	width: 100%;
+	height: 2px;
+	background: url("../img/dushed_header.png") repeat-x;
+	margin-top: 56px;
+}
+
+.top_menu li{
+	float: left;
+	margin-right: 5px;
+}
+
+.top_menu li a{
+	margin-top: 10px;
+	display: block;
+	font-family: "Georgia";
+	font-size: 16px;
+	color: #404040;
+	padding: 5px 25px;
+	text-decoration: none;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+.top_menu li a:hover, .top_menu li a.active{
+	background: #fff;
+}
+
+/*submenu*/
+.submenu_container{
+	width: 950px;
+	margin: 60px auto;
+}
+
+
+.submenu_container .submenu_title{
+	 font-family: "Alkonaut_v1_0"; 
+	 font-size: 72px;
+	 display: block;
+	 float: left;
+	 margin-top: 60px;
+}
+
+.submenu_container ul{
+	float: right;
+}
+
+.submenu_container li{
+	float: left;
+	width: 115px;
+	text-align: center;
+	margin: 0 15px;
+}
+
+.submenu_wrap_img{
+	height: 130px;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.submenu_wrap_img:after {
+  content:"";
+  height:130px;
+   width:0;
+   display:inline-block;
+   vertical-align:middle;
+}
+
+.submenu_wrap_img img{
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.submenu_container li a{
+	text-decoration: none;
+}
+
+.submenu_container li a:hover span{
+	text-decoration: underline;
+}
+
+.submenu_container li span{
+	display: block;
+	font-size: 16px;
+	color: #000;
+}
+
+/*Main Content*/
+.content_container{
+	width: 830px;
+	margin: 0 auto;
+}
+
+.title_image{
+	width: 280px;
+	height: 280px;
+	margin: 0 auto;
+	overflow: hidden;
+	margin-bottom: 30px;
+	-webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+	border-radius: 200px;
+}
+
+.title_image img{
+	width: 100%;
+	height: 100%;
+}
+
+h1{
+	font-family: "Georgia";
+	font-size: 24px;
+	color: #323232;
+	text-align: center;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #bcc6ce;
+	margin-bottom: 25px;
+}
+
+/*left column*/
+
+.left_column{
+	width: 490px;
+	float: left;
+}
+
+/*right column*/
+.right_column{
+	width: 270px;
+	float: right;
+}
+
+.contacts span{
+	display: block;
+	line-height: 100%;
+	font-family: "Georgia";
+	font-size: 16px;
+	line-height: 1;
+	margin-bottom: 5px;
+	color: #323232;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.map_info{
+	text-align: center;
+	margin-top: 30px;
+	display: block;
+	font-family: "Georgia";
+	font-size: 16px;
+	color: #323232;
+	text-decoration: none;
+}
+
+.map_info:hover{
+	text-decoration: underline;
+}
+
+h2{
+	font-family: "Georgia";
+	font-size: 24px;
+	color: #323232;
+	text-align: center;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #bcc6ce;
+	margin-bottom: 25px;
+}
+
+/*gallery*/
+
+.gallery_container{
+	width: 860px;
+	margin: 0 auto;
+	padding-bottom: 55px;
+}
+
+.gallery_item{
+	width: 190px;
+	height: 140px;
+	overflow: hidden;
+	float: left;
+	margin-right: 24px;
+}
+
+.gallery_item  img{
+	height: 100%;
+	width: auto;
+}
+
+.bottom_menu_line{
+	width: 100%;
+	height: 2px;
+	background: url("../img/dushed_header.png") repeat-x;
+}
+
+/*Objects Page*/
+.object_container{
+	width: 860px;
+	margin: 0 auto;
+}
+
+.object_container .node{
+	padding-bottom: 35px;
+	border-bottom: 1px dashed #bcc6ce;
+	margin-bottom: 40px;
+}
+
+.object_container .node.last{
+	border: none;
+}
+
+.object_container .node img{
+	width: 157px;
+	height: 157px;
+	float: left;
+	margin-right: 35px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+}
+
+.node_info{
+	width: 655px;
+	float: left;
+}
+
+.object_container .node .title{
+	font-size: 24px;
+	color: #323232;
+	font-family: "Georgia";
+	margin-bottom: 20px;
+	display: block;
+}
+
+.object_container .node input[type="button"]{
+	float: right;
+}
+
+/*main page*/
+
+.index_content_container{
+	width: 950px;
+	margin: 0 auto;
+	padding: 60px 0;
+	margin-top: 60px;
+}
+
+.index_content_container .title{
+	font-size: 72px;
+	color: #000;
+	font-family: "Alkonaut_v1_0"; 
+	margin-bottom: 35px;
+	display: block;
+}
+
+.wrap_info_index_content{
+	width: 300px;
+	float: left;
+}
+
+.index_content_container img{
+	width: 478px;
+	height: 478px;
+	float: right;
+	border: 6px solid #e8e8e8;
+	-webkit-border-radius: 300px;
+	-moz-border-radius: 300px;
+	border-radius: 300px;
+}
+ 
+/*Footer*/
+.footer_container{
+	padding-top: 25px;
+	text-align: center;
+}
+
+.footer_container ul{
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.footer_container li{
+	display: inline-block;
+    /* TODO denis: добавил по аналогии с top_menu li */
+    margin-right: 5px;
+}
+
+.footer_container li a{
+	display: block;
+	font-family: "Georgia";
+	font-size: 16px;
+	color: #404040;
+	padding: 5px 25px;
+	text-decoration: none;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+.footer_container li a:hover, .footer_container li a.active{
+	background: #bcc6ce;
+	color: #eee;
+}
+
+.footer_logo{
+	width: 112px;
+	height: 56px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 15px;
+	background: url("../img/pics/footer_logo.png") no-repeat;
+}
+
+.footer_info{
+	font-family: "Trebuchet MS";
+	font-size: 12px;
+	color: #bcc6ce;
+}
+
