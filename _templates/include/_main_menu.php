@@ -2,10 +2,9 @@
 
 class MainMenu
 {
-
 	public static function getHtml()
 	{
-		global $_o, $language;
+		global $_o;
 		$menuItems = get_data_array_rs(
 			'id, name',
 			$_o['cms_menus_items_table'],

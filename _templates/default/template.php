@@ -18,6 +18,12 @@ echo <<<stop
 stop;
 switch ($pagePath[0])
 {
+	case 'objects':
+		echo '<@gadget_submenu><@gadget_objects>';
+		break;
+	case 'object':
+		echo '<@gadget_submenu><@gadget_object>';
+		break;
 	// типовой макет
 	default:
 		echo '<@gadget_content>';
