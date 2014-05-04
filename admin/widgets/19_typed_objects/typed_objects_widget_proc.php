@@ -51,6 +51,12 @@ function typed_objects_get_object_html($object, $description)
 	if (isset($description['no_object_image']) && $description['no_object_image']==true) $image='';
 	else $image="<div class='typed_objects_object_node_image'><img src='$img' style='width:{$width}px;'/></div>";
 
+	if (widget_exists('gallery')) $gallery_html=<<<stop
+<input type="button" class="admin_tool_button" value="Фотогалерея объекта" onClick="typed_objects_go_gallery({$object['id']})">
+stop;
+	else $gallery_html='';
+
+
 	$obj_name_js=str2js($object['name']);
 	$html=<<<stop
 <div class="typed_objects_object_node" id="typed_objects_list_node_{$object['id']}">
@@ -60,7 +66,7 @@ $image
 <br>
 <input type="checkbox" id="typed_object_visible_{$object['id']}" onClick="typed_objects_toggle_visible({$object['id']})" $ch> Отображать на сайте
 <hr>
-<input type="button" class="admin_tool_button" value="Фотогалерея объекта" onClick="typed_objects_go_gallery({$object['id']})">
+$gallery_html
 <input type="button" class="admin_tool_button" style="margin-left: 20px;" value="Переместить/скопировать объект" onClick="typed_objects_object_move_start({$object['id']})">
 <input type="button" class="admin_tool_button" style="float:right" value="Удалить объект" onClick="typed_objects_delete_object({$object['id']}, '$obj_name_js')">
 <br>
@@ -88,12 +94,12 @@ function typed_objects_get_objects_list($menu_item, $obj_type, $page)
 stop;
 			$ot=get_data_array('type, count(*) as cnt', $_cms_objects_table, "menu_item='$menu_item' group by type order by cnt desc limit 1");
 			$ot=$ot['type'];
-			foreach($_cms_objects_types as $obj_type)
+			foreach($_cms_objects_types as $type)
 			{
-		        if ($obj_type['id']==$ot) $sl='selected="selected"';
+		        if ($type['id']==$ot) $sl='selected="selected"';
 				else $sl='';
 				$html.=<<<stop
-<option value="{$obj_type['id']}" $sl>{$obj_type['name']}</option>
+<option value="{$type['id']}" $sl>{$type['name']}</option>
 stop;
 			}
 			$html.='</select></div>';
@@ -108,7 +114,7 @@ stop;
 <input type="button" value="Сортировка объектов" id="typed_objects_object_sort" onClick="typed_objects_object_sort()" style="float:right;"><br>
 stop;
 	$start=$page*$_cms_objects_admin_list_page_length;
-	$res=query("select SQL_CALC_FOUND_ROWS * from $_cms_objects_table where menu_item='$menu_item' order by sort, id desc limit $start, $_cms_objects_admin_list_page_length");
+	$res=query("select SQL_CALC_FOUND_ROWS * from $_cms_objects_table where menu_item='$menu_item' and type='$obj_type' order by sort, id desc limit $start, $_cms_objects_admin_list_page_length");
 	$total=get_data('FOUND_ROWS()');
 	$html.=get_admin_pager($total, $page, $_cms_objects_admin_list_page_length, 'typed_objects_show_objects_list_page');
 	while ($r=mysql_fetch_assoc($res))
@@ -921,7 +927,7 @@ function typed_objects_object_move($id, $menu, $copy_mode)
 		$fields_list=mysql_get_fields_list($_cms_objects_table, 'id|menu_item');
 		query("insert into $_cms_objects_table (menu_item, $fields_list) select '$menu' as menu_item, $fields_list from $_cms_objects_table where id='$id'");
 		$new_id=mysql_insert_id();
-		// Createing the new rocords in the object details table
+		// Creating the new records in the object details table
         $fields_list=mysql_get_fields_list($_cms_objects_details, 'id|node');
         query("insert into $_cms_objects_details (node, $fields_list) select $new_id as node, $fields_list from $_cms_objects_details where node='$id'");
 		if (isset($_cms_gallery_table) && $_cms_gallery_table!='')
@@ -938,13 +944,14 @@ function typed_objects_object_move($id, $menu, $copy_mode)
 				query("insert into $_cms_gallery_table (menu_item, file, title, comment, sort, visible, link_type) values ('$new_id', '{$pp['basename']}', '{$r['title']}', '{$r['comment']}', '{$r['sort']}', '{$r['visible']}', '{$r['link_type']}')");
 			}
 			mysql_free_result($res);
+
 			// Copy the gallery data record and link to new gallery (object)
 	        $fields_list=mysql_get_fields_list($_cms_gallery_data_table, 'id|menu_item');
 	        query("insert into $_cms_gallery_data_table (menu_item, $fields_list) select $new_id as menu_item, $fields_list from $_cms_gallery_data_table where menu_item='$id'");
 		}
 		// Copy linked text parts images and change link to images in new text parts records
 		$resT=query("select * from $_cms_objects_details where node='$new_id' and type='st'");
-		echo "new ID[$new_id] ".mysql_num_rows($resT)."\n";
+//		echo "new ID[$new_id] ".mysql_num_rows($resT)."\n";
         $fields_list=mysql_get_fields_list($_cms_text_parts, 'id|node');
 		while ($rt=mysql_fetch_assoc($resT))
 		{
@@ -954,19 +961,28 @@ function typed_objects_object_move($id, $menu, $copy_mode)
 
 			// TODO: Проверить копирование изображений при копировании объектов
 			$res=query("select * from $_cms_text_parts where node='{$rt['id']}'");
-			echo "text part ID[{$rt['id']}] ".mysql_num_rows($res)."\n";
+//			echo "text part ID[{$rt['id']}] ".mysql_num_rows($res)."\n";
 			while ($r=mysql_fetch_assoc($res))
 			{
 				$dest=create_unique_file_name($_base_site_structured_text_images_path, $r['image']);
 				$pp=pathinfo($dest);
-				echo "[{$r['id']}] $_base_site_structured_text_images_path/{$r['image']} -> $dest\n";
+//				echo "[{$r['id']}] $_base_site_structured_text_images_path/{$r['image']} -> $dest\n";
 	        	copy("$_base_site_structured_text_images_path/{$r['image']}", $dest);
 				query("update $_cms_text_parts set image='{$pp['basename']}' where id='{$r['id']}'");
 			}
 			mysql_free_result($res);
 		}
 		mysql_free_result($resT);
-		// TODO: Дописать копирование аттачментов
+
+		// Копируем все аттачменты
+		$res=query("select * from $_cms_objects_details where node='$new_id' and type='file'");
+		while($r=mysql_fetch_assoc($res))
+		{
+			$new_attachment=common_attachment_duplicate($r['value']);
+			if ($new_attachment===false) continue;
+			query("update $_cms_objects_details set value='$new_attachment' where id='{$r['id']}'");
+		}
+		mysql_free_result($res);
 	}
 }
 // -----------------------------------------------------------------------------

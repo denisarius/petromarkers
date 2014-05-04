@@ -904,7 +904,7 @@ function common_attachment_duplicate($attachment_id)
 	$dest=create_unique_file_name($_base_site_attachments_path, $attachment['file']);
 	@copy("$_base_site_attachments_path/{$attachment['file']}", $dest);
 	$pp=pathinfo($dest);
-	query("insert into _attachments (name, file, real_file) values ('{$attachment['name']}', '{$pp['base_name']}', '{{$attachment['real_file']}}')");
+	query("insert into _attachments (name, file, real_file) values ('{$attachment['name']}', '{$pp['basename']}', '{$attachment['real_file']}')");
 	$new_attachment_id=mysql_insert_id();
 	return $new_attachment_id;
 }

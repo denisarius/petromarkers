@@ -1,6 +1,5 @@
 <?php
-global $_languages, $language, $_scripts_libs_url, $pagePath, $html_charset;
-global $_base_site_js_url, $_base_site_css_url;
+global $_o, $_languages, $language, $pagePath, $html_charset;
 
 require_once pmIncludePath('design.php');
 
@@ -11,6 +10,7 @@ echo <<<stop
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset={$html_charset}">
+		<script type="text/javascript" src="{$_o['base_site_js_url']}/core.js"></script>
 	</head>
 	<body>
 		<div class="top_menu_container">

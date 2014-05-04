@@ -40,7 +40,7 @@ $_o['base_site_objects_images_url']=$_base_site_objects_images_url="$_base_site_
 $_o['cms_objects_types']=$_cms_objects_types=array(
 	array(
 		'id'=>'1', 'name'=>'Кластеры', 'menu_item_id'=>'2',
-		'no_object_image'=>true, 'sx'=>800, 'sy'=>600,
+		'sx'=>800, 'sy'=>600,
 		'details'=>array(
 			array('id'=>'coordinates', 'name'=>'Координаты (из Yandex.maps)', 'type'=>'s'),
 		)),

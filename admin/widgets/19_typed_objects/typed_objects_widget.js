@@ -187,13 +187,15 @@ function typed_objects_object_edit(id)
 function typed_objects_toggle_visible(id)
 {
     img="<img src='images/"+loading_icon_24+"' id='typed_object_visible_loader_"+id+"' style='vertical-align: text-bottom;'>";
-	$("#typed_object_visible_"+id+"_img").after(img);
-	$("#typed_object_visible_"+id+"_img").css("display", "none");
+
+	check_img_el=$("#typed_object_visible_"+id+"_img");
+	check_img_el.after(img);
+	check_img_el.css("display", "none");
 	if ($("#typed_object_visible_"+id).is(":checked")) ch=0;
 	else ch=1;
 	res=execQuery(typed_objects_widget_ajax_manager_url, {section : "typed_objectSetObjectVisible", id: id, visible: ch});
 	$("#typed_object_visible_loader_"+id).remove();
-	$("#typed_object_visible_"+id+"_img").css("display", "inline");
+	check_img_el.css("display", "inline");
 }
 //------------------------------------------------------------------------------
 function typed_objects_go_gallery(id)
@@ -256,6 +258,7 @@ function typed_objects_sort_save()
 //------------------------------------------------------------------------------
 function typed_objects_object_move_start(id)
 {
+	// TODO: Сделать выбор только тех разделов в которых могут быть объекты этого типа
 	$("#typed_objects_object_id").val(id);
 	admin_info_show("Выбор раздела для перемещения текста", "<img src='/admin/images/"+loading_icon+"'>");
 	res=execQuery(common_widget_ajax_manager_url, {section : "commonGetMenusMap", func: 'typed_objects_object_move_mode'});
