@@ -49,7 +49,7 @@ $_cms_objects_types=array(
 		'id'=>'2', 'name'=>'Объекты', 'menu_item_id'=>'2',
 		'sx'=>800, 'sy'=>600,
 		'details'=>array(
-			array('id'=>'cluster', 'name'=>'Кластер', 'type'=>'oo'),
+			array('id'=>'cluster', 'name'=>'Кластер', 'type'=>'oo', 'options' => '1'),
 			array('id'=>'address', 'name'=>'Адрес', 'type'=>'s'),
 			array('id'=>'coordinates', 'name'=>'Координаты (из Yandex.maps)', 'type'=>'s'),
 		)),
