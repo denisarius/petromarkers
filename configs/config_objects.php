@@ -1,12 +1,12 @@
 <?php
-$_cms_objects_table='objects';
-$_cms_objects_details='objects_details';
+$_o['cms_objects_table']=$_cms_objects_table='objects';
+$_o['cms_objects_details']=$_cms_objects_details='objects_details';
 
-$_cms_objects_image_sx=800;
-$_cms_objects_image_sy=600;
+$_o['cms_objects_image_sx']=$_cms_objects_image_sx=800;
+$_o['cms_objects_image_sy']=$_cms_objects_image_sy=600;
 
-$_base_site_objects_images_path="$_base_site_root_path/data/objects";
-$_base_site_objects_images_url="$_base_site_root_url/data/objects";
+$_o['base_site_objects_images_path']=$_base_site_objects_images_path="$_base_site_root_path/data/objects";
+$_o['base_site_objects_images_url']=$_base_site_objects_images_url="$_base_site_root_url/data/objects";
 
 // Параметры Объектов
 // id		- уникальный id параметра
@@ -37,7 +37,7 @@ $_base_site_objects_images_url="$_base_site_root_url/data/objects";
 // width	- размер окна редактирования параметра для типа 'tb'
 // columns	- список столбцов таблицы (разделитель '|'). Для типа 'tb'
 // readonly - свойство не редактируется в админке (если 'readoly'=>true)
-$_cms_objects_types=array(
+$_o['cms_objects_types']=$_cms_objects_types=array(
 	array(
 		'id'=>'1', 'name'=>'Кластеры', 'menu_item_id'=>'2',
 		'no_object_image'=>true, 'sx'=>800, 'sy'=>600,
