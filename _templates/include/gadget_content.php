@@ -5,18 +5,15 @@
 		show_content_404();
 	else
 	{
+		global $_o;
 		set_page_title($text['title']);
-//		используем так:
-//		$text['title']
-//	$text['content']
 		echo <<<stop
 		<div class="index_content_container">
 			<div class="wrap_info_index_content">
-				<span class="title">Современный старый<br> город</span>
-				<p>Сайт информационного агентства «Интерфакс» недоступен для пользователей. По словам директора службы финансово-экономической информации агентства Юрия Погорелого, причиной послужили  DDoS-атаки начавшиеся еще ночью. Сейчас техподдержка ресурса ведет восстановительные работы.</p>
-				<input type="button" value="Подробнее">
+				<span class="title">{$text['title']}</span>
+				<p>{$text['content']}</p>
 			</div>
-			<img src="img/pics/pic1.jpg" alt="">
+			<img src="@!template@/images/content_pic.jpg" alt="">
 			<br>
 		</div>
 stop;

@@ -97,9 +97,9 @@ function get_menu_item_path($id, $parent = null)
 
 function get_content()
 {
-	global $pagePath, $_cms_texts_table;
-	$text_id = (int)end($pagePath);
-	return get_data_array('*', $_cms_texts_table, "menu_item=$text_id");
+	global $_o;
+	$text_id = get_menu_item_id();
+	return get_data_array('*', $_o['cms_texts_table'], "menu_item=$text_id");
 }
 
 /**
