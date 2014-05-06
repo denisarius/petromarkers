@@ -57,7 +57,7 @@ $_o['cms_directories_data']=$_cms_directories_data='directories_data';
 $_o['cms_texts_url_prefix']=$_cms_texts_url_prefix='content';
 
 // ID äëÿ ğàçëè÷íûõ ìåíş
-$_main_menu_id=1;   // Íåîáõîäèìî äëÿ simple_mode
+$_o['main_menu_id']=$_main_menu_id=1;   // Íåîáõîäèìî äëÿ simple_mode
 // Îïèñàíèå ÿçûêîâ ñàéòà
 $_languages=array(
 	array('id'=>'ru',
