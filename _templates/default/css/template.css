@@ -9,9 +9,9 @@ footer, header, hgroup, menu, nav, section {
 }
 
  @font-face {
-    font-family: "Alkonaut_v1_0"; 
-    src: url(../fonts/Alkonaut_v1_0.ttf);
-}
+    font-family: "Alkonaut_v1_0";
+     src: url('@!template@/fonts/Alkonaut_v1_0.ttf');
+ }
 
 br {
  clear: both;
@@ -74,8 +74,8 @@ input[type="button"]:hover{
 .top_menu_line{
 	width: 100%;
 	height: 2px;
-	background: url("../img/dushed_header.png") repeat-x;
-	margin-top: 56px;
+    background: url("@!template@/images/dushed_header.png") repeat-x;
+    margin-top: 56px;
 }
 
 .top_menu li{
@@ -266,7 +266,7 @@ h2{
 .bottom_menu_line{
 	width: 100%;
 	height: 2px;
-	background: url("../img/dushed_header.png") repeat-x;
+    background: url("@!template@/images/dushed_header.png") repeat-x;
 }
 
 /*Objects Page*/
@@ -384,7 +384,7 @@ h2{
 	display: block;
 	margin: 0 auto;
 	margin-bottom: 15px;
-	background: url("../img/pics/footer_logo.png") no-repeat;
+    background: url("@!template@/images/footer_logo.png") no-repeat;
 }
 
 .footer_info{

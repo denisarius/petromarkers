@@ -39,6 +39,8 @@ function get_menu_url($id)
 	$menuUrl = ltrim($menu['url'], '/');
 	if ($menu['url'] != '')
 	{
+		if ($menu['url'] === '/')
+			return '/';
 		if (strpos($menu['url'], 'html') === false)
 			return "/$menuUrl/$id/0.html";
 		else
@@ -111,12 +113,20 @@ function get_content()
  */
 function get_menu_item_id($level = 0)
 {
-	global $pagePath;
+	global $pagePath, $_o;
 
 	// если последний элемент пути - число >0, то это ид меню
 	$p = end($pagePath);
 	if (is_numeric($p) and count($pagePath) == 1)
+	{
 		$menuId = (int)$p;
+	}
+	elseif ($pagePath[0] === '') // особый случай - корень сайта
+	{
+		$menuId = get_data('id', $_o['cms_menus_items_table'], 'menu = '.$_o['main_menu_id']." and url='/'");
+		if ($menuId === false)
+			return 0;
+	}
 	else
 	{
 		// иначе ид меню должен быть в предпоследнем элементе
