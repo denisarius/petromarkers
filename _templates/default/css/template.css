@@ -15,10 +15,10 @@ footer, header, hgroup, menu, nav, section {
 
 br {
  clear: both;
- margin: 0px;
- height: 0px;
+ margin: 0;
+ height: 0;
  line-height: 0px;
- font-size: 0px;
+ font-size: 0;
 }
 
 body{
@@ -39,8 +39,6 @@ p{
 input[type="button"] {
 	border: none;
 	padding: 5px 10px;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
 	border-radius: 20px;
 	background: #bcc6ce;
 	font-size: 16px;
@@ -91,8 +89,6 @@ input[type="button"]:hover{
 	color: #404040;
 	padding: 5px 25px;
 	text-decoration: none;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
 	border-radius: 20px;
 }
 
@@ -105,7 +101,6 @@ input[type="button"]:hover{
 	width: 950px;
 	margin: 60px auto;
 }
-
 
 .submenu_container .submenu_title{
     font-family: "Alkonaut_v1_0", Arial, Helvetica, Sans-serif;
@@ -171,8 +166,6 @@ input[type="button"]:hover{
 	margin: 0 auto;
 	overflow: hidden;
 	margin-bottom: 30px;
-	-webkit-border-radius: 200px;
-	-moz-border-radius: 200px;
 	border-radius: 200px;
 }
 
@@ -207,8 +200,7 @@ h1{
 .contacts span{
 	display: block;
 	line-height: 100%;
-    font-family: "Georgia", Arial, Helvetica, Sans-serif;
-    font-size: 16px;
+    font: 16px "Georgia", Arial, Helvetica, Sans-serif;
 	line-height: 1;
 	margin-bottom: 5px;
 	color: #323232;
@@ -222,8 +214,7 @@ h1{
 	text-align: center;
 	margin-top: 30px;
 	display: block;
-    font-family: "Georgia", Arial, Helvetica, Sans-serif;
-    font-size: 16px;
+    font: 16px "Georgia", Arial, Helvetica, Sans-serif;
 	color: #323232;
 	text-decoration: none;
 }
@@ -233,8 +224,7 @@ h1{
 }
 
 h2{
-    font-family: "Georgia", Arial, Helvetica, Sans-serif;
-    font-size: 24px;
+    font: 24px "Georgia", Arial, Helvetica, Sans-serif;
 	color: #323232;
 	text-align: center;
 	padding-bottom: 10px;
@@ -290,8 +280,6 @@ h2{
 	height: 157px;
 	float: left;
 	margin-right: 35px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
 	border-radius: 100px;
 }
 
@@ -301,9 +289,8 @@ h2{
 }
 
 .object_container .node .title{
-	font-size: 24px;
 	color: #323232;
-    font-family: "Georgia", Arial, Helvetica, Sans-serif;
+    font: 24px "Georgia", Arial, Helvetica, Sans-serif;
     margin-bottom: 20px;
 	display: block;
 }
@@ -327,10 +314,11 @@ h2{
     font-family: "Alkonaut_v1_0", Arial, Helvetica, Sans-serif;
     margin-bottom: 35px;
 	display: block;
+	line-height: 1.2em;
 }
 
 .wrap_info_index_content{
-	width: 300px;
+	width: 420px;
 	float: left;
 }
 
@@ -339,9 +327,8 @@ h2{
 	height: 478px;
 	float: right;
 	border: 6px solid #e8e8e8;
-	-webkit-border-radius: 300px;
-	-moz-border-radius: 300px;
 	border-radius: 300px;
+	margin: 0 0 30px 30px;
 }
  
 /*Footer*/
@@ -363,13 +350,10 @@ h2{
 
 .footer_container li a{
 	display: block;
-    font-family: "Georgia", Arial, Helvetica, Sans-serif;
-    font-size: 16px;
+    font: 16px "Georgia", Arial, Helvetica, Sans-serif;
 	color: #404040;
 	padding: 5px 25px;
 	text-decoration: none;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
 	border-radius: 20px;
 }
 
@@ -388,8 +372,7 @@ h2{
 }
 
 .footer_info{
-	font-family: "Trebuchet MS";
-	font-size: 12px;
+	font: 12px "Trebuchet MS", Arial, Sans-serif;
 	color: #bcc6ce;
 }
 

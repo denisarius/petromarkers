@@ -30,6 +30,12 @@ switch ($pagePath[0])
 	case 'object':
 		echo '<@gadget_submenu><@gadget_object>';
 		break;
+	// Раздел для мобильных устройств
+	// Отображается карта с выбранным кластером вцентре и связанные с ним объекты
+	// В pagePath[1] передается ID кластера
+	case 'pm':
+		echo '<@gadget_mob_cluster>';
+		break;
 	// текстовый раздел
 	default:
 		echo '<@gadget_content>';

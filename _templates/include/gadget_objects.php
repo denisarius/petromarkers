@@ -48,9 +48,4 @@ function getCurrentClusterId()
 	return (int)($pagePath[2] ? $pagePath[2] : 1);
 }
 
-function getObjectDetailsUrl($objectId)
-{
-	return '/object/'.get_menu_item_id().'/'.$objectId.'.html';
-}
-
 ?>

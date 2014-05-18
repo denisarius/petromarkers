@@ -60,7 +60,7 @@ stop;
 	$obj_name_js=str2js($object['name']);
 	$html=<<<stop
 <div class="typed_objects_object_node" id="typed_objects_list_node_{$object['id']}">
-<div class="typed_objects_object_node_title" onClick="typed_objects_object_edit({$object['id']})">{$object['name']}</div>
+<div class="typed_objects_object_node_title" onClick="typed_objects_object_edit({$object['id']})">{$object['name']} [ID={$object['id']}]</div>
 $image
 <div class="typed_objects_object_node_note" >$note</div>
 <br>

@@ -196,5 +196,10 @@ function get_info_url($id)
 }
 
 //------------------------------------------------------------------------------
+function getObjectDetailsUrl($objectId)
+{
+	return '/object/'.get_menu_item_id().'/'.$objectId.'.html';
+}
+
 
 ?>
