@@ -36,7 +36,7 @@ stop;
 
 	$map=objects_get_map_description($res);
 	echo <<<stop
-<div id="map" style="background-color:#f85"></div>
+<div id="map"></div>
 <script type="text/javascript">
 $(document).ready(function(){
 	w=$(window).width();
