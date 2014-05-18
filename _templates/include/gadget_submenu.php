@@ -26,37 +26,6 @@
 ITEM;
 		}
 		?>
-
-		<!--		<li>-->
-		<!--			<a href="#">-->
-		<!--				<div class="submenu_wrap_img"><img src="img/pics/submenu1.png" alt=""></div>-->
-		<!--				<span>Подпись</span>-->
-		<!--			</a>-->
-		<!--		</li>-->
-		<!--		<li>-->
-		<!--			<a href="#">-->
-		<!--				<div class="submenu_wrap_img"><img src="img/pics/submenu2.png" alt=""></div>-->
-		<!--				<span>Подпись</span>-->
-		<!--			</a>-->
-		<!--		</li>-->
-		<!--		<li>-->
-		<!--			<a href="#">-->
-		<!--				<div class="submenu_wrap_img"><img src="img/pics/submenu3.png" alt=""></div>-->
-		<!--				<span>Подпись</span>-->
-		<!--			</a>-->
-		<!--		</li>-->
-		<!--		<li>-->
-		<!--			<a href="#">-->
-		<!--				<div class="submenu_wrap_img"><img src="img/pics/submenu4.png" alt=""></div>-->
-		<!--				<span>Подпись</span>-->
-		<!--			</a>-->
-		<!--		</li>-->
-		<!--		<li>-->
-		<!--			<a href="#">-->
-		<!--				<div class="submenu_wrap_img"><img src="img/pics/submenu5.png" alt=""></div>-->
-		<!--				<span>Подпись</span>-->
-		<!--			</a>-->
-		<!--		</li>-->
 	</ul>
 	<br>
 </div>

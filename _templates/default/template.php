@@ -17,6 +17,11 @@ echo <<<stop
 	<body>
 	<@gadget_top_menu>
 stop;
+// формат урлов:
+// '/' - индекс сайта. для индексного раздела меню в БД задан урл равный '/'
+// список объектов кластера: /objects/<main_menu_item_id>/<cluster_id>.html
+// описание объекта: /object/<main_menu_item_id>/<object_id>.html
+// /<text_id>.html - текстовый раздел
 switch ($pagePath[0])
 {
 	case 'objects':
@@ -25,7 +30,7 @@ switch ($pagePath[0])
 	case 'object':
 		echo '<@gadget_submenu><@gadget_object>';
 		break;
-	// типовой макет
+	// текстовый раздел
 	default:
 		echo '<@gadget_content>';
 		break;

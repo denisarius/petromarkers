@@ -1,6 +1,8 @@
 <div class="content_container">
 	<div class="object_container">
 		<?php
+		// длина фрагмента описания объекта, отображаемая в списке объектов
+		define('OBJECT_BRIEF_LEN', 500);
 		global $_o;
 		$menuItems = get_data_array_rs(
 			'SQL_CALC_FOUND_ROWS o.id, o.name, o.image, o.note',
@@ -15,7 +17,9 @@
 		$itemNum = 1;
 		while ($item = $menuItems->next())
 		{
-			$url = "/objects/$mainMenuId/{$item['id']}.html";
+			$info = pmGetNotice($item['note'], OBJECT_BRIEF_LEN);
+			if (strlen($info) != strlen(pmGetNotice($item['note'], 100000)))
+				$info .= ' ...';
 			$imgUrl = $item['image'] ? "{$_o['base_site_objects_images_url']}/{$item['image']}" : '';
 			$classLast = $itemNum++ == $itemsTotal ? 'last' : '';
 			$detailsUrl = getObjectDetailsUrl($item['id']);
@@ -25,7 +29,7 @@
 			<img src="$imgUrl" alt="">
 			<div class="node_info">
 				<span class="title">{$item['name']}</span>
-				<p>{$item['note']}</p>
+				<p>$info</p>
 				<input type="button" value="Подробнее" onclick="window.location.href='$detailsUrl'">
 			</div>
 			<br>
@@ -33,33 +37,6 @@
 NODE;
 		}
 		?>
-		<!--		<div class="node">-->
-		<!--			<img src="img/pics/pic1.jpg" alt="">-->
-		<!--			<div class="node_info">-->
-		<!--				<span class="title">Собор «Александра Невского»</span>-->
-		<!--				<p>Государственный совет республики Крым на сегодняшней сессии принял постановление о создании Банка Крыма, сообщает «Крыминформ». Решение было принято единогласно. Ранее президент Владимир Путин подписал закон об особенностях функционирования финансовой системы Крыма на переходный период.</p>-->
-		<!--				<input type="button" value="Подробнее">-->
-		<!--			</div>-->
-		<!--			<br>-->
-		<!--		</div>-->
-		<!--		<div class="node">-->
-		<!--			<img src="img/pics/pic1.jpg" alt="">-->
-		<!--			<div class="node_info">-->
-		<!--				<span class="title">Краеведческие музей</span>-->
-		<!--				<p>Государственный совет республики Крым на сегодняшней сессии принял постановление о создании Банка Крыма, сообщает «Крыминформ». Решение было принято единогласно. Ранее президент Владимир Путин подписал закон об особенностях функционирования финансовой системы Крыма на переходный период.</p>-->
-		<!--				<input type="button" value="Подробнее">-->
-		<!--			</div>-->
-		<!--			<br>-->
-		<!--		</div>-->
-		<!--		<div class="node last">-->
-		<!--			<img src="img/pics/pic1.jpg" alt="">-->
-		<!--			<div class="node_info">-->
-		<!--				<span class="title">Собор «Александра Невского»</span>-->
-		<!--				<p>Государственный совет республики Крым на сегодняшней сессии принял постановление о создании Банка Крыма, сообщает «Крыминформ». Решение было принято единогласно. Ранее президент Владимир Путин подписал закон об особенностях функционирования финансовой системы Крыма на переходный период.</p>-->
-		<!--				<input type="button" value="Подробнее">-->
-		<!--			</div>-->
-		<!--			<br>-->
-		<!--		</div>-->
 	</div>
 </div>
 
