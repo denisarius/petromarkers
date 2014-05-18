@@ -1,0 +1,25 @@
+body {
+	font-size:12px;
+	font-family: arial;
+}
+h1 {
+	font-size: 28px;
+	font-weight: normal;
+}
+h2 {
+	font-size: 24px;
+	font-weight: normal;
+}
+h3 {
+	font-size: 20px;
+	font-weight: normal;
+}
+b, strong {
+	color: #69a83b;
+}
+
+table td.table_header {
+	background-color: #89c85b;
+	color: #fff;
+	font-weight: bold;
+}
