@@ -11,6 +11,7 @@ echo <<<stop
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset={$html_charset}">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="{$_o['base_site_js_url']}/core.js"></script>
 	</head>
 	<body>

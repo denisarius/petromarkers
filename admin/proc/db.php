@@ -2,13 +2,17 @@
 // -----------------------------------------------------------------------------
 function admin_check_db_structure($tables)
 {
-	global $_admin_db_structure, $_admin_root_path;
+	global $_admin_check_db_once, $_admin_db_structure, $_admin_root_path;
 
     if (!isset($_SESSION['db_config_crc'])) $_SESSION['db_config_crc']='no crc';
 	$crc=md5_file("$_admin_root_path/_config_db.php");
-	if ($_SESSION['db_config_crc']==$crc) return true;
+	if ($_admin_check_db_once && $_SESSION['db_config_crc']==$crc) return true;
 	$db_name=get_data('database()');
 	if ($db_name=='') return false;
+	foreach($_admin_db_structure as $table) {
+		if (array_key_exists('need', $table) && $table['need'])
+			array_push($tables, $table['name']);
+	}
 	foreach($_admin_db_structure as $table)
 	{
         if (in_array($table['name'], $tables))
@@ -64,8 +68,11 @@ function admin_db_check_unnecessary_tables($only_check, $tables)
 	global $_admin_db_structure;
 	$res=query('show tables');
 	$tbl=array();
-	foreach($_admin_db_structure as $table)
-		if (in_array($table['name'], $tables)) array_push($tbl, $table['name']);
+	foreach($_admin_db_structure as $table) {
+		if (in_array($table['name'], $tables)) {
+			array_push($tbl, $table['name']);
+		}
+	}
 	while ($r=mysql_fetch_array($res))
 	{
 		if (!in_array($r[0], $tbl) || !in_array($r[0], $tables))
@@ -84,10 +91,12 @@ function admin_db_check_unnecessary_fields($only_check, $tables)
 	global $_admin_db_structure;
 	$res=query('show tables');
 
-	while ($r=mysql_fetch_array($res))
-	{
-		foreach($_admin_db_structure as $table)
-			if ($table['name']==$r[0] && in_array($table['name'], $tables)) $fields=$table['fields'];
+	while ($r=mysql_fetch_array($res)) {
+		foreach($_admin_db_structure as $table) {
+			if ($table['name']==$r[0] && in_array($table['name'], $tables)) {
+				$fields=$table['fields'];
+			}
+		}
 		if (isset($fields))
 		{
 			$fld=array();
@@ -114,20 +123,20 @@ function admin_db_check_unnecessary_indexes($only_check, $tables)
 	global $_admin_db_structure;
 	$res=query('show tables');
 
-	while ($r=mysql_fetch_array($res))
-	{
+	while ($r=mysql_fetch_array($res)) {
 		unset($indexes);
-		foreach($_admin_db_structure as $table)
-			if ($table['name']==$r[0] && in_array($table['name'], $tables) && array_key_exists('indexes', $table)) $indexes=$table['indexes'];
-		if (isset($indexes))
-		{
+		foreach($_admin_db_structure as $table) {
+			if ($table['name']==$r[0] && in_array($table['name'], $tables) && array_key_exists('indexes', $table)) {
+				$indexes=$table['indexes'];
+			}
+		}
+		if (isset($indexes)) {
 			$idx=array();
 			foreach($indexes as $index)
 				array_push($idx, $index['name']);
 			$resC=query("show index from `{$r[0]}`");
 			while ($rc=mysql_fetch_assoc($resC))
-				if ($rc['Key_name']!='PRIMARY' && !in_array($rc['Key_name'], $idx))
-				{
+				if ($rc['Key_name']!='PRIMARY' && !in_array($rc['Key_name'], $idx)) {
 					echo "лишний индекс {$rc['Key_name']} в таблице {$r[0]}<br>";
 					if ($only_check) return false;
 					query("alter table `{$r[0]}` drop index `{$rc['Key_name']}`");
@@ -142,35 +151,34 @@ function admin_db_check_unnecessary_indexes($only_check, $tables)
 // -----------------------------------------------------------------------------
 function admin_repair_db_structure($tables)
 {
-	global $db_name, $db_charset, $db_collation, $_admin_db_structure;
+	global $db_name, $db_charset, $db_collation, $_admin_db_structure, $_admin_root_path;
 
 	ob_start();
 	echo '<div class="admin_input"><h3>Восстановление структуры БД</h3>';
     // Проверяем существование БД
 	$db=get_data('database()');
-	if ($db=='')
-	{
+	if ($db=='') {
 		// Создаем БД
 		query("create database `$db_name` default character set $db_charset default collate $db_collation");
 		mysql_select_db($db_name);
 		echo "Создана БД '$db_name'<br>";
 	}
 	admin_db_check_unnecessary_indexes(false, $tables);
-	foreach($_admin_db_structure as $table)
-	{
-		if (in_array($table['name'], $tables))
-		{
+	foreach($_admin_db_structure as $table) {
+		if (array_key_exists('need', $table) && $table['need'])
+			array_push($tables, $table['name']);
+	}
+	foreach($_admin_db_structure as $table) {
+		if (in_array($table['name'], $tables)) {
 			// Проверяем наличие таблицы
-			if (!admin_db_check_table_exists($table['name']))
-			{
+			if (!admin_db_check_table_exists($table['name'])) {
 				// Создаем таблицу
 	            $query=admin_db_get_create_table_sql($table);
 				query($query);
 				echo "Создана таблица '{$table['name']}'<br>";
 			}
 			foreach($table['fields'] as $field)
-				if (($code=admin_db_check_table_field($table['name'], $field))!=1)
-				{
+				if (($code=admin_db_check_table_field($table['name'], $field))!=1) {
 					// Редактируем параметры поля таблицы
 					switch($code)
 					{
@@ -209,8 +217,7 @@ function admin_repair_db_structure($tables)
 				}
 			if (array_key_exists('indexes', $table))
 				foreach($table['indexes'] as $index)
-					if (($idx_check=admin_db_check_table_index($table['name'], $index))!=1)
-					{
+					if (($idx_check=admin_db_check_table_index($table['name'], $index))!=1) {
 						if ($idx_check==-2) // Индекс есть, но тип не совпадает
 							query("alter table `{$table['name']}` drop index `{$index['name']}`");
 						if (!isset($index['fulltext']) || !$index['fulltext'])

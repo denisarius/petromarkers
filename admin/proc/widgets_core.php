@@ -165,11 +165,16 @@ stop;
 
 stop;
 		$js=$widget['obj']->get_addon_js();
-		foreach($js as $s)
+		foreach($js as $s) {
+			if ($s[0]=='*') {
+				$s=substr($s, 1);
+				$s="$_admin_widgets_url/{$this->widgets[$s]['path']}/{$s}_widget.js";
+			}
 			$str.=<<<stop
 <script type="text/javascript" src="$s"></script>
 
 stop;
+		}
 	}
 	return $str;
 }
@@ -187,6 +192,17 @@ public function get_css_includes_tags()
 <link href="$_admin_widgets_url/{$widget['path']}/{$widget['id']}_widget.css" rel="stylesheet" type="text/css">
 
 stop;
+		$css=$widget['obj']->get_addon_css();
+		foreach($css as $s) {
+			if ($s[0]=='*') {
+				$s=substr($s, 1);
+				$s="$_admin_widgets_url/{$this->widgets[$s]['path']}/{$s}_widget.css";
+			}
+			$str.=<<<stop
+<link href="$s" rel="stylesheet" type="text/css">
+
+stop;
+		}
 	}
 	return $str;
 }
@@ -299,6 +315,11 @@ public function get_db_structure()
 }
 // -----------------------------------------------------------------------------
 public function get_addon_js()
+{
+	return array();
+}
+// -----------------------------------------------------------------------------
+public function get_addon_css()
 {
 	return array();
 }

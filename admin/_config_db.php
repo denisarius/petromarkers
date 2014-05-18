@@ -1,5 +1,5 @@
 <?php
-$_admin_db_structure=array();
+	$_admin_db_structure=array();
 
 	// таблица для работы с константами
 	// id 		- уникальный id константы
@@ -507,6 +507,7 @@ $_admin_db_structure=array();
 					array('name'=>'visible',  	'type'=>'int(1)',		'primary'=>false, 'default'=>'0'),
 				),
 				'indexes'=>array(
+					array('name'=>'vti',			'index'=>'visible, type, id'),
 					array('name'=>'ft_name',			'index'=>'name, note(512)',	'fulltext'=>true),
 				)
 			)
@@ -529,6 +530,7 @@ $_admin_db_structure=array();
 					array('name'=>'value',     	'type'=>'text',			'primary'=>false, 'null'=>true),
 				),
 				'indexes'=>array(
+					array('name'=>'nt',			'index'=>'node, typeId'),
 				)
 			)
 	);

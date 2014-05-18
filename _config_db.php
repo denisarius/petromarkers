@@ -6,7 +6,8 @@ $db_pass='';
 
 $db_name='ptzweb_petromarkers';
 $db_login='ptzweb_db';
-$db_pass='9894958%)(83q09';
+//$db_pass='9894958%)(83q09';
+$db_pass='34VJyKZM1H65R';
 
 $db_debug=true;
 $db_full_debug=false;
